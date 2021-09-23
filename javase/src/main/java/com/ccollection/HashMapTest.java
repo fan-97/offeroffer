@@ -11,7 +11,7 @@ public class HashMapTest {
     public static void main(String[] args) {
         System.out.println(mod1(10, 3));
         System.out.println(mod2(10, 3));
-        HashMap<String, Integer> map = new HashMap<>();
+        HashMap<String, Integer> map = new HashMap<>(2);
         map.put("zhangsan01", 23);
         map.put("zhangsan02", 22);
         map.put("zhangsan03", 33);

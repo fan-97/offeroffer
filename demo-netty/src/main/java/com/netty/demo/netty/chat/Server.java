@@ -1,6 +1,8 @@
 package com.netty.demo.netty.chat;
 
+import com.netty.demo.netty.simple.NettyServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -17,16 +19,22 @@ public class Server {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(bossGroup,workerGroup)
-                .localAddress(8888)
+        bootstrap.group(bossGroup, workerGroup)
+                .localAddress(9999)
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-
+                        ch.pipeline().addLast(new NettyServerHandler());
                     }
                 });
-        
+        try {
+            ChannelFuture future = bootstrap.bind().sync();
+            future.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
