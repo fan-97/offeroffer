@@ -16,22 +16,21 @@ public class ThreadPoolTest1 {
     private static final TimeUnit unit = TimeUnit.SECONDS;
     private static final BlockingQueue workQueue = new LinkedBlockingDeque();
     private static final ThreadPoolExecutor THREAD_POOL_EXECUTOR =
-            new ThreadPoolExecutor(1, 1, 10, unit, workQueue);
+            new ThreadPoolExecutor(10, 10, 10, unit, workQueue);
 
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
             int finalI = i;
             THREAD_POOL_EXECUTOR.execute(() -> {
-                try {
-                    Thread.sleep(1000);
-                    if(finalI %10==0){
-                        int a = 2/0;
-                    }
-                    System.out.println(Thread.currentThread().getName());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                System.out.println(Thread.currentThread().getName());
             });
+        }
+        THREAD_POOL_EXECUTOR.shutdown();
+        try {
+            THREAD_POOL_EXECUTOR.awaitTermination(Integer.MAX_VALUE,TimeUnit.MILLISECONDS);
+            System.out.println("all task done");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
     }
