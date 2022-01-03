@@ -882,6 +882,7 @@ public class HashMap7<K,V>
      */
     @Override
     public Set<K> keySet() {
+        KeySet keySet = null;
         Set<K> ks = keySet;
         return (ks != null ? ks : (keySet = new KeySet()));
     }
@@ -918,8 +919,9 @@ public class HashMap7<K,V>
      * support the <tt>add</tt> or <tt>addAll</tt> operations.
      */
     public Collection<V> values() {
-        Collection<V> vs = values;
-        return (vs != null ? vs : (values = new Values()));
+//        Collection<V> vs = values;
+//        return (vs != null ? vs : (values = new Values()));
+        return null;
     }
 
     private final class Values extends AbstractCollection<V> {
