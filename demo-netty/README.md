@@ -1,4 +1,4 @@
-# Netty 网络编程框架
+
 
 ## 概念
 ### Channel
@@ -22,3 +22,17 @@ ChannelHandler 是对 Channel 中数据的处理器，这些处理器可以是�
 
 ## Netty执行流程
 ![](../img/netty流程.png)
+
+## ChannelInboundHandlerAdapter和SimpleChannelInboundHandler
+
+- SimpleChannelInboundHandler中的channelRead()方法会自动释放接收到的来自于对方的msg所占有的所有资源。
+
+- ChannelInboundHandlerAdapter 中的 channelRead()方法不会自动释放接收到的来自于对方的msg
+
+## 粘包与拆包
+
+通过网络发送的一批二进制数据包，称为frame
+
+- 当发送方的二进制数据包太大（太多），则会进行**拆包**被拆分成多个frame。接收方会进行**粘包**
+- 当发送方的二进制数据包太小无法构成一个frame，则会将多个很小的数据包进行**粘包**合并成一个frame。接收方会进行**拆包**
+

@@ -3,14 +3,14 @@ package com.netty.demo.netty.simple;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
 
 /**
  * @author fanjie
  * @date 2020/6/20 11:56
  */
-public class NettyClientHandler extends ChannelInboundHandlerAdapter {
+public class NettyClientHandler extends SimpleChannelInboundHandler {
 
     // 管道就绪触发该方法
     @Override
@@ -24,11 +24,11 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf) msg;
         System.out.println("服务器回复的消息：" + buf.toString(CharsetUtil.UTF_8));
         System.out.println("服务器的地址:" + ctx.channel().remoteAddress());
-
+//        ctx.channel().writeAndFlush(Unpooled.copiedBuffer("hello server: " + ChannelInboundHandlerAdapter.class, CharsetUtil.UTF_8));
     }
 
     @Override
