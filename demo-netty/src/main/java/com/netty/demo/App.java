@@ -1,19 +1,21 @@
 package com.netty.demo;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
 
 /**
  * Hello world!
  */
 public class App {
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new FileReader("text.txt"));
 
-        // 读取文件的每一行 然后进行处理 并重新写入到新文件中
-        String s = br.readLine();
-        BufferedWriter bw = new BufferedWriter(new FileWriter("A_1.txt"));
+    private static final int COUNT_BITS = 29;
+
+    private static final int RUNNING    = -1 << COUNT_BITS;
+    private static final int SHUTDOWN   =  0 << COUNT_BITS;
+    private static final int STOP       =  1 << COUNT_BITS;
+    private static final int TIDYING    =  2 << COUNT_BITS;
+    private static final int TERMINATED =  3 << COUNT_BITS;
+    public static void main(String[] args) throws Exception {
+        ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer();
     }
 }
