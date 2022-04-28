@@ -1,5 +1,6 @@
 package com.threadd;
 
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -11,11 +12,19 @@ public class ThreadPoolTest {
     private static final int COUNT_BITS = Integer.SIZE - 3;
     private static final int CAPACITY   = (1 << COUNT_BITS) - 1;
     private static final int RUNNING    = -1 << COUNT_BITS;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         System.out.println(Integer.toBinaryString(-1));
         ThreadPoolTest test = new ThreadPoolTest();
         System.out.println(runStateOf(test.ctl.get()));
         System.out.println(workerCountOf(test.ctl.get()));
+        final ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 2, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<>(10));
+        executor.execute(()->{
+            System.out.println(Thread.currentThread().getName());
+        });
+        executor.execute(()->{
+            System.out.println(Thread.currentThread().getName());
+        });
+
     }
 
     private static int runStateOf(int c)     { return c & ~CAPACITY; }

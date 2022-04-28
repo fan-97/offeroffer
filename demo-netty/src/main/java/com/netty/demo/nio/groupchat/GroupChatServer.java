@@ -97,13 +97,11 @@ public class GroupChatServer {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            if (socketChannel != null) {
-                try {
-                    System.out.println(socketChannel.getRemoteAddress() + "  已经离线！");
-                    socketChannel.close();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
+            try {
+                System.out.println(socketChannel.getRemoteAddress() + "  已经离线！");
+                socketChannel.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
         }
     }

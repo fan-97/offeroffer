@@ -1,7 +1,5 @@
 package com.base;
 
-import com.ccollection.Main;
-
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -11,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @author Faster
  * @date 2019/9/17 17:05
  */
-public class Test extends Main {
+public class Test {
     private static final ThreadPoolExecutor sleepThreadPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 30L, TimeUnit.SECONDS, new SynchronousQueue<>());
     private static final ThreadPoolExecutor taskThreadPool = new ThreadPoolExecutor(4, 4, 30L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1000));
 
