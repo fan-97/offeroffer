@@ -1,4 +1,4 @@
-package com.ccollection;
+package com.container;
 
 public class StringDemo {
 }
