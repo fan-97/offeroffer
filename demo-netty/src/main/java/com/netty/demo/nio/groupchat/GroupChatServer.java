@@ -66,7 +66,7 @@ public class GroupChatServer {
                             // 读取客户端的消息
                             readData(selectionKey);
                         }
-                        //
+                        // selectedKeys集合在处理完事件后不会主动删除，需要手动将其从集合中移除。否则下次来其他事件的时候会再次遍历到之前已经处理过事件的SelectionKey，就可能会出现NPE
                         iterator.remove();
                     }
                 }

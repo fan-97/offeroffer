@@ -1,10 +1,7 @@
 package com.netty.demo.netty.simple;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -30,9 +27,11 @@ public class NettyServer {
                 // 设置channel实现
                 .channel(NioServerSocketChannel.class)
                 // 设置最大连接数为128
-                .option(ChannelOption.SO_BACKLOG,128)
+                .option(ChannelOption.SO_BACKLOG, 128)
                 // 设置连接状态为长连接
-                .childOption(ChannelOption.SO_KEEPALIVE,true)
+                .childOption(ChannelOption.SO_KEEPALIVE, true)
+                // 设置接收buf大小
+                .childOption(ChannelOption.RCVBUF_ALLOCATOR, new AdaptiveRecvByteBufAllocator(16, 16, 16))
                 // 创建通道测试对象(匿名对象）
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     // 给pipeline 配置处理器
@@ -47,8 +46,6 @@ public class NettyServer {
         System.out.println("server is already..");
         // 对关闭通道事件监听
         channelFuture.channel().closeFuture().sync();
-
-
 
     }
 }
