@@ -126,8 +126,37 @@ channelFuture.addListener(new ChannelFutureListener(){
 
 #### 扩容
 
-- 写入后数据大小未超过512，则选择下一个16的整数倍，例如写入后大小为12，则扩容capacity=16
-- 写入后数据大小超过512，则选择下一个2^n，例如写入后大小为513，则扩容后capacity=2^10 = 1024（512=2^9)
+针对版本
+
+- 写入后数据大小超过 4M(1024\*1024\*4)  ，则选择4M的整数倍，
+
+```java
+ if (minNewCapacity > threshold) {
+     int newCapacity = minNewCapacity / threshold * threshold; // 向下取整到4M的整数倍
+     if (newCapacity > maxCapacity - threshold) { // 加上4M后大于了最大容量 则直接取最大容量 否则取加上4M之后的数
+         newCapacity = maxCapacity;
+     } else {
+         newCapacity += threshold;
+     }
+     return newCapacity;
+ }
+```
+
+- 写入后数据大小未超过4M，则选择2^n,满足2^n>=64&&>=newCapacity，比如写入后的大小是65 则选择 2^7(因为2^6=64),如果写入后是63 ，则选择64
+
+```java
+  // 64 <= newCapacity is a power of 2 <= threshold
+final int newCapacity = MathUtil.findNextPositivePowerOfTwo(Math.max(minNewCapacity, 64)); // 
+return Math.min(newCapacity, maxCapacity);
+
+//返回2^n ,满足 2^n >= value 
+public static int findNextPositivePowerOfTwo(final int value) {
+    assert value > Integer.MIN_VALUE && value < 0x40000000;
+    return 1 << (32 - Integer.numberOfLeadingZeros(value - 1));
+}
+```
+
+
 
 创建byteBuf的时机：
 
@@ -321,4 +350,3 @@ selectionKey.interestOps(SelectionKey.OP_ACCEPT);
 
 ![](../img/netty-source-code1.jpg)
 
-   

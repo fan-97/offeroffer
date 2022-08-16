@@ -10,8 +10,8 @@ public class StringTest2 {
 //        String s2 = "aaa";
 //        System.out.println(s1 == s2);    // false
 
-//        s1 = new String("bbb").intern();
-//        s2 = "bbb";
+//        String s1 = new String("bbb").intern();
+//        String s2 = "bbb";
 //        System.out.println(s1 == s2);    // true
 //
 //        s1 = "ccc";
@@ -57,7 +57,9 @@ public class StringTest2 {
 //        s3.intern();    // 常量池22的地址和s3的地址不同
 //        System.out.println(s3 == s4); // false
 
-    // 对于什么时候会在常量池存储字符串对象，我想我们可以基本得出结论: 1. 显示调用String的intern方法的时候; 2. 直接声明字符串字面常量的时候，例如: String a = "aaa";
-    // 3. 字符串直接常量相加的时候，例如: String c = "aa" + "bb";  其中的aa/bb只要有任何一个不是字符串字面常量形式，都不会在常量池生成"aabb". 且此时jvm做了优化，不//   会同时生成"aa"和"bb"在字符串常量池中
+        // 对于什么时候会在常量池存储字符串对象，我想我们可以基本得出结论:
+        // 1. 显示调用String的intern方法的时候; 2. 直接声明字符串字面常量的时候，例如: String a = "aaa";
+        // 3. 字符串直接常量相加的时候，例如: String c = "aa" + "bb";
+        // 其中的aa/bb只要有任何一个不是字符串字面常量形式，都不会在常量池生成"aabb". 且此时jvm做了优化，不会同时生成"aa"和"bb"在字符串常量池中
     }
 }
