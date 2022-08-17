@@ -1,4 +1,4 @@
-package com.container;
+package com.collections;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

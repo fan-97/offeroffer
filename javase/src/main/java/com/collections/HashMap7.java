@@ -23,7 +23,7 @@
  * questions.
  */
 
-package com.container;
+package com.collections;
 
 import java.io.IOException;
 import java.io.Serializable;

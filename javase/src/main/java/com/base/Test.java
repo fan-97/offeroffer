@@ -14,7 +14,10 @@ public class Test {
     private static final ThreadPoolExecutor taskThreadPool = new ThreadPoolExecutor(4, 4, 30L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1000));
 
     public static void main(String[] args) {
-        for (int i = 0; i < 1; i++) {
+        A a = null;
+        assert false;
+
+        /*for (int i = 0; i < 1; i++) {
             int finalI = i;
             sleepThreadPool.execute(() -> {
                 try {
@@ -25,7 +28,7 @@ public class Test {
                     e.printStackTrace();
                 }
             });
-        }
+        }*/
     }
 
     private static void task() {
