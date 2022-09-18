@@ -10,9 +10,11 @@ import java.util.Map;
 public class HashMapTest {
     public static void main(String[] args) {
         HashMap<String, Integer> map = new HashMap<>(3);
-        map.put("zhangsan01", 23);
-        map.put("zhangsan02", 22);
-        map.put("zhangsan03", 33);
+        map.put("1",1);
+        map.put("1",2);
+//        for (int i = 0; i < 13; i++) {
+//            map.put("i" + i, i);
+//        }
 
         //获取所有的key  keySet()
         System.out.println("=====================keySet()方式==================");
@@ -43,6 +45,6 @@ public class HashMapTest {
     }
 
     public static int mod2(int n, int d) {
-        return n & (d-1);
+        return n & (d - 1);
     }
 }

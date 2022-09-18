@@ -1,5 +1,7 @@
 package com.base;
 
+import cn.hutool.core.util.IdUtil;
+
 public class Main {
     int a = 1;
     public static void main(String[] args) {
@@ -51,6 +53,8 @@ public class Main {
 //        System.out.println(a==d);
 
         System.out.println(c==d);
+
+        System.out.println(IdUtil.fastUUID());
 
     }
 //    public int FindGreatestSumOfSubArray(int[] array) {

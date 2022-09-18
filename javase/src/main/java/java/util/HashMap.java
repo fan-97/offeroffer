@@ -640,26 +640,32 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         Node<K, V>[] tab;
         Node<K, V> p;
         int n, i;
+        // 初始化table
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;
+        // 没有hash冲突，直接放入table数组中
         if ((p = tab[i = (n - 1) & hash]) == null)
             tab[i] = newNode(hash, key, value, null);
         else {
             Node<K, V> e;
             K k;
+            // 如果键的值以及节点 hash 等于链表中的第一个键值对节点时，则将 e 指向该键值对
             if (p.hash == hash &&
                     ((k = p.key) == key || (key != null && key.equals(k))))
                 e = p;
             else if (p instanceof TreeNode)
                 e = ((TreeNode<K, V>) p).putTreeVal(this, tab, hash, key, value);
             else {
+                // 遍历链表 并记录链表的长度，当链表超过阈值（8）就转换成红黑树
                 for (int binCount = 0; ; ++binCount) {
+                    // 当链表中不包含插入的key时就添加到链表的后面
                     if ((e = p.next) == null) {
                         p.next = newNode(hash, key, value, null);
                         if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
                             treeifyBin(tab, hash);
                         break;
                     }
+                    // 链表中包含该key
                     if (e.hash == hash &&
                             ((k = e.key) == key || (key != null && key.equals(k))))
                         break;
