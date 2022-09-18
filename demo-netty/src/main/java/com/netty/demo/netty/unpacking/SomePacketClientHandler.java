@@ -89,8 +89,10 @@ public class SomePacketClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(message);
-        ctx.writeAndFlush(message);
+        ctx.write(message);
+        ctx.writeAndFlush("hello==============");
+//        ctx.writeAndFlush(message);
+
     }
 
     @Override

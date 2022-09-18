@@ -1,4 +1,4 @@
-package com.container;
+package com.collections;
 
 public class Main {
     int a = 1;
