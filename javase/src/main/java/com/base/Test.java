@@ -1,50 +1,40 @@
 package com.base;
 
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 
 /**
  * @author Faster
  * @date 2019/9/17 17:05
  */
 public class Test {
-    private static final ThreadPoolExecutor sleepThreadPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 30L, TimeUnit.SECONDS, new SynchronousQueue<>());
-    private static final ThreadPoolExecutor taskThreadPool = new ThreadPoolExecutor(4, 4, 30L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1000));
 
     public static void main(String[] args) {
-        A a = null;
-        assert false;
-
-        /*for (int i = 0; i < 1; i++) {
-            int finalI = i;
-            sleepThreadPool.execute(() -> {
-                try {
-                    System.out.println(Thread.currentThread().getName()+"   sleep 5s  index:"+ finalI);
-                    Thread.sleep(1000);
-                    task();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        }*/
+        int n = 1;
+        int x;
+        // 和
+        double sum = 0;
+        // 每一项
+        double term = 0;
+        double limit = Math.pow(10,-5);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("input x:");
+        String s = sc.nextLine();
+        x = Integer.parseInt(s);
+        do {
+            term = Math.pow(-1.0, n + 1) * (Math.pow(x, 2 * n - 1) / factorial(2 * n - 1));
+            sum += term;
+            System.out.println("terms:"+term);
+            n++;
+        } while (Math.abs(term) >= limit);
+        System.out.println("sum=" + sum);
     }
 
-    private static void task() {
-        taskThreadPool.execute(() -> {
-            System.out.println(Thread.currentThread().getName() + ":task");
-        });
+    private static double factorial(int n) {
+        double result = 1.0;
+        for (int i = 1; i <= n; i++) {
+            result *= i;
+        }
+        return result;
     }
 
-    public static void change(A a) {
-        a.i = 20;
-        A aa = new A();
-        a = aa;
-        System.out.println(aa.i + "  " + a.i);
-    }
-}
-
-class A {
-    public int i = 15;
 }
