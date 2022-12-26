@@ -6,6 +6,11 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
+/***
+ * 将任务分解成多个子任务执行
+ * @author fanjie
+ * @date 13:40 2022/12/8
+ */
 public class TestForkJoinPool {
     public static void main(String[] args) {
 
@@ -21,7 +26,7 @@ public class TestForkJoinPool {
 
         Instant end = Instant.now();
 
-        System.out.println("使用时间："+ Duration.between(start,end).toMillis());
+        System.out.printf("使用时间：%s s%n", Duration.between(start, end).toMillis());
     }
 
 }

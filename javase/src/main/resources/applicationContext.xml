@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userDao" class="com.spring.dao.impl.UserDaoImpl">
+        <constructor-arg value="234324"/>
+    </bean>
+    <bean id="aAwarePostProcessor" class="com.spring.AAwarePostProcessor"/>
+    <bean id="aProcessor" class="com.spring.AProcessor"/>
+    <bean id="bAwarePostProcessor" class="com.spring.BAwarePostProcessor"/>
+    <bean id="bProcessor" class="com.spring.BProcessor"/>
+</beans>

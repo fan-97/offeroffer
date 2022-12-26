@@ -1,5 +1,7 @@
 package com.sjms.dtproxy;
 
 public interface IHelloWorld {
-    public void sayHelloWorld();
+    void sayHelloWorld();
+
+    void sayFuckYou();
 }
